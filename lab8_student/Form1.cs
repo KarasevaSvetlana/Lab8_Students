@@ -99,17 +99,18 @@ namespace lab8_student
             foreach (Student st in students)
                 listBox1.Items.Add(st.FIO + " " + st.Curs + " " + st.NumBook + " " + st.CodeG + " " + st.Discipline + " " + st.Rating);
         }
-        public static void LoadMyFile(string filename)
+        public static int LoadMyFile(string filename)
         {
             int errorInXml = 0;
             int record = 1;
             students.Clear();
             try
             {
-
+                //asdasas
                 XmlDocument xDoc = new XmlDocument();
-                errorInXml = 7;
+
                 xDoc.Load(filename);
+                errorInXml = 7;
                 // получим корневой элемент
                 XmlElement xRoot = xDoc.DocumentElement;
 
@@ -167,6 +168,7 @@ namespace lab8_student
                         }
 
                     }
+                    errorInXml = -1;
                     record++;
                     students.Add(student);
                 }
@@ -185,11 +187,12 @@ namespace lab8_student
                     case 6: MessageBox.Show("Данные с xml-документа о Rating в записи " + record + " были прочитаны неверно"); break;
                     case 7: MessageBox.Show(ex.Message); break;
                     default: MessageBox.Show(ex.Message); errorInXml = 8; break;
-                }            
+                }
                 MessageBox.Show("Загрузка последующих записей остановлена");
             }
-           
+            return errorInXml;
         }
+
     }
-    
+
 }
